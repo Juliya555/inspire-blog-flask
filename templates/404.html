@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8">
+
+    <title>
+        Page not found (404)
+    </title>
+
+    <!--styles -->
+    <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/fontawesome/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/animate.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet">
+    <!--/styles -->
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--Favicons -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+</head>
+
+<body>
+
+<!-- page-header -->
+<section id="start">
+    <div class="full-section banner">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6"><h4><a href="/" class="main-title">Blog</a></h4></div>
+                <div class="col-md-6 col-sm-6 site_map">
+                    <a href="/">Home</a> / Blog /
+                    {% if current_user.has_role('admin') %}
+                        <a href="/admin">Admin</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /page-header -->
+
+<!--Start error-->
+<section>
+    <div class="col-md-offset-2 col-md-8 wow zoomIn" data-wow-duration="700ms" data-wow-delay="300ms">
+        <div class="error">
+            <h2 class="smt"><span><img
+                    src="{{ url_for('static', filename='images/left.png') }}"> Page not found (404) <img
+                    src="{{ url_for('static', filename='images/right.png') }}"></span></h2>
+        </div>
+    </div>
+</section>
+<!--End error-->
+
+</body>
+</html>

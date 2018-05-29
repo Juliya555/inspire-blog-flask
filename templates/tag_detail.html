@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ tag.name |capitalize }} posts
+{% endblock %}
+
+{% block content %}
+    <!--Start blog-->
+
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="row">
+
+                <!--Start heading-->
+                <div class="col-md-offset-2 col-md-8 wow zoomIn">
+                    <div class="section-header">
+                        <h2 class="smt"><span><img src="{{ url_for('static', filename='images/left.png') }}">
+                            Posts for "{{ tag.name }}" tag:
+                            <img src="{{ url_for('static', filename='images/right.png') }}"></span></h2>
+                    </div>
+                </div>
+                <!--End heading-->
+
+                <!-- Start Blog item #1-->
+                {% for post in pages.items %}
+
+                    <div class="col-md-4 wow zoomIn" data-wow-duration="700ms" data-wow-delay="300ms">
+                        <div class="blog-post">
+                            <div class="post-media">
+                                {% for image in post.images %}
+                                    {% if image.is_main %}
+                                        <img src="{{ url_for('static', filename='images/posts_images/' + image.image_path) }}"
+                                             alt="{{ image.name }}"></a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div> <!--/.post-media -->
+
+                            <div class="post-desc">
+                                <h4> {{ post.short_title |truncate(24) }} </h4>
+
+                                <ul class="entry-meta">
+                                    <li>{{ post.created.strftime('%Y-%m-%d') }}</li>
+
+                                    {% if post.comments.count() == 1 %}
+                                        <li>
+                                            <a href="{{ url_for('post_detail', category_slug=post.category.category_slug, post_slug=post.post_slug) }}#go-comments-one ">
+                                                {{ post.comments.count() }} Comment</a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a href="{{ url_for('post_detail', category_slug=post.category.category_slug, post_slug=post.post_slug) }}#go-comments-many ">
+                                                {{ post.comments.count() }} Comments
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                </ul>
+
+                                <p>{{ post.body |truncate(130) }}</p>
+
+                                <a href="{{ url_for('post_detail',
+                                               category_slug=post.category.category_slug,
+                                               post_slug=post.post_slug) }}"
+                                   class="btn btn-primary btn-rounded">Read More</a>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div> <!--/.row-->
+
+
+            <!--pagination-->
+            <nav>
+                <ul class="pagination">
+                    <li
+                            {% if not pages.has_prev %} class="disabled" {% endif %}>
+                        <a href="?page={{ pages.prev_num }}" aria-label="Previous"><span aria-hidden="true">&lt;</span></a>
+                    </li>
+
+                    {% for page in pages.iter_pages() %}
+
+                        <li
+                                {% if page == pages.page %} class="active" {% endif %}>
+                            <a href="?page={{ page }}"> {{ page }} <span class="sr-only">(current)</span></a>
+                        </li>
+
+                    {% endfor %}
+
+                    <li
+                            {% if not pages.has_next %} class="disabled" {% endif %}>
+                        <a href="?page={{ pages.next_num }}" aria-label="Next"><span aria-hidden="true">&gt;</span></a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!--/.pagination-->
+
+
+        </div> <!--/.container-->
+    </section>
+    <!--End blog-->
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block slider %}
+    <!--Start Slider -->
+    <section id="home">
+        <div class="slider-overlay"></div>
+        <div class="homeslider flexslider">
+            <ul class="slides">
+                <li class="slide1 bg"></li>
+                <li class="slide2 bg"></li>
+                <li class="slide3 bg"></li>
+            </ul>
+        </div><!--/ homeslider-->
+        <!-- start text slider-->
+        <div class="tb">
+            <div class="tb-cell">
+                <div class="slide-text">
+                    <ul id="text-slider">
+                        <li><h1>DESIGN. DISCUSS. INSPIRE. </h1></li>
+                        <li><h1>BROWSE STYLES AND GET INSPIRED</h1></li>
+                        <li><h1>FIND NEW IDEAS</h1></li>
+                    </ul>
+                    <p> Best interior design blog <br/>for decorating, interior planning or redesigning</p>
+                    <div class="page-scroll scroll"><a class="btn btn-lg btn-primary btn-color-white" href="#start"> Get
+                        started </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Slider-->
+{% endblock %}
+
+<!--Page Content-->
+
+{% block content %}
+    <div class="margin"></div>
+    <!--Start About-->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="row">
+
+                <!--Start heading-->
+                <div class="col-md-offset-2 col-md-8 wow zoomIn" data-wow-duration="700ms" data-wow-delay="300ms">
+                    <div class="section-header">
+                        <h2 class="smt"><span><img src="{{ url_for('static', filename='images/left.png') }}"> What you get <img
+                                src="{{ url_for('static', filename='images/right.png') }}"></span></h2>
+                    </div>
+                </div>
+                <!--End heading-->
+
+                <!--About Item #1-->
+                <div class="col-md-4 wow zoomIn" data-wow-duration="700ms" data-wow-delay="300ms">
+                    <div class="services-box">
+                        <div class="services-icon"><i class="fa fa-arrow-circle-up"></i></div>
+                        <div class="services-desc">
+                            <h4>Design of your dream</h4>
+                            <p>Keep your inspiration levels way up.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--About Item #2-->
+                <div class="col-md-4 wow zoomIn" data-wow-duration="700ms" data-wow-delay="400ms">
+                    <div class="services-box">
+                        <div class="services-icon"><i class="fa fa-briefcase"></i></div>
+                        <div class="services-desc">
+                            <h4>Always fresh ideas</h4>
+                            <p>Use talented resource every day.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--About Item #3-->
+                <div class="col-md-4 wow zoomIn" data-wow-duration="700ms" data-wow-delay="500ms">
+                    <div class="services-box">
+                        <div class="services-icon"><i class="fa fa-paint-brush"></i></div>
+                        <div class="services-desc">
+                            <h4>New experience</h4>
+                            <p>Make the ordinary look extraordinary.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!--/.row-->
+        </div> <!--/.container-->
+    </section>
+    <!--End About-->
+
+    <!--Start categories-->
+    <section id="works" class="section">
+        <!-- Filtering -->
+        <div class="wow fadeInUp" data-wow-duration="700ms" data-wow-delay="500ms">
+
+            <!--Start heading-->
+            <div class="col-md-offset-2 col-md-8">
+                <div class="section-header">
+                    <h2 class="smt"><span><img src="{{ url_for('static', filename='images/left.png') }}"> Blog categories <img
+                            src="{{ url_for('static', filename='images/right.png') }}"></span></h2>
+                </div>
+            </div>
+            <!--End heading-->
+
+            <div class=" col-md-12">
+                <!-- Filtering -->
+                <ul class="filtering">
+                    <li class="filter" data-filter="all">All</li>
+                    <li class="filter" data-filter="Color-Design">Color Design</li>
+                    <li class="filter" data-filter="Interior">Interior</li>
+                    <li class="filter" data-filter="Room-Design">Room Design</li>
+                    <li class="filter" data-filter="Renovation">Renovation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="full-width wow fadeInUp" data-wow-duration="700ms" data-wow-delay="700ms">
+            <!-- Work Grid -->
+            <ul class="work-grid">
+                <!-- Work Block -->
+                <div class="full-width wow fadeInUp" data-wow-duration="700ms" data-wow-delay="700ms">
+                    <!-- Work Grid -->
+                    <ul class="work-grid">
+                        {% for category in categories %}
+                            <li class="work-item thumbnail-img mix {{ category.filter_name }}">
+                                <a href="{{ url_for('static', filename='images/category/' + category.image) }}"
+                                   class="popup-image">
+                                    <img src="{{ url_for('static', filename='images/category/' + category.image) }}"
+                                         alt="{{ category.image }}"></a>
+                                <div class="work-info">
+                                    <div class="work-info-detail display-table">
+                                        <div class="display-table-cell">
+                                            <h4>{{ category.title }}</h4>
+                                            <p>{{ category.filter_name }}</p>
+                                            <a href="{{ url_for('show_category_posts', category_slug=category.category_slug) }}"
+                                               class="btn btn-primary btn-sm btn-color-white">Open</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+        <div class="work-all wow fadeInUp" data-wow-duration="700ms" data-wow-delay="800ms">
+            <a href="{{ url_for('posts.show_all_posts') }}" class="btn btn-primary btn-lg">
+                View All Posts
+            </a>
+        </div>
+
+    </section>
+    <!--End categories-->
+
+
+    <!--Start facts-->
+    <section id="facts" class="section parallax">
+
+        <div class="container">
+            <div class="row">
+                <!--Start facts info #1-->
+                <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms">
+                    <div class="facts-detail">
+                        <i class="fa fa-group"></i>
+                        <span>{{ users| length }}</span>
+                        <p>Users</p>
+                    </div>
+                </div>
+
+                <!--Start facts info #2-->
+                <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="700ms" data-wow-delay="400ms">
+                    <div class="facts-detail">
+                        <i class="fa fa-table"></i>
+                        <span>{{ categories | length }}</span>
+                        <p>Categories</p>
+                    </div>
+                </div>
+
+                <!--Start facts info #3-->
+                <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInUp" data-wow-duration="700ms" data-wow-delay="500ms">
+                    <div class="facts-detail">
+                        <i class="fa fa-edit"></i>
+                        <span>{{ posts | length }}</span>
+                        <p>Posts</p>
+                    </div>
+                </div>
+            </div> <!--/row-->
+        </div> <!--/container-->
+    </section>
+    <!--End facts-->
+
+{% endblock %}
