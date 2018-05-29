@@ -20,7 +20,7 @@ It uses MySQL database (tested for MySQL 14.14).
   ```
 4. Create your db. Copy file **'config.ref.py'** to **'config.py'** and change **SQLALCHEMY_DATABASE_URI** according to your database settings. 
 5. Create a gmail account for communicating with your visitors. Change **MAIL_USERNAME** and **MAIL_PASSWORD** in **'config.py'** according to your gmail settings.
-6. Use **db_dump.sql** file to load structure and data to launch the project.
+6. Use **'db_dump.sql'** file to load structure and data to launch the project:
   ```
   mysql -u root -p -f mysql_db_name < db_dump.sql
   ```
